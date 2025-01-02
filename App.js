@@ -1,23 +1,40 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native';
-
-export default function PizzaTranslator() {
-  const [text, setText] = useState('');
+import { StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, ScrollView } from 'react-native';
+export default function Down() {
   return (
-    <View>
-      <TextInput style={styles.container}
-        placeholder="Type Here to translate"
-        onChangeText={newText => setText(newText)}
-        defaultValue={text}
-      />
+    <ScrollView>
+      <Image style={styles.image}
+        source={require('./assets/me.jpg')} />
 
-      <Text>
-        {text
-          .split('')
-          .map(word => word && '🍕')
-          .join('')}
+
+      <Text style={styles.aboutme}>
+        Hi, I'm sandesh a developer. I'm Passionate about programming,
+        playing with fonts, integrating sophisticated styling, and fooling around
+        with my code to produce visually captivating and responsive web designs.
+        Let's build something amazing together!
       </Text>
-    </View>
+
+      <Text style={styles.education}>Education</Text>
+      <Text style={styles.aboutme}>
+        The ScrollView is a generic scrolling container that can contain
+        multiple components and views. The scrollable items can be heterogeneous,
+        and you can scroll both vertically and horizontally by setting the
+        horizontal property.
+      </Text>
+      <Text style={styles.aboutme}>
+        The ScrollView is a generic scrolling container that can contain
+        multiple components and views. The scrollable items can be heterogeneous,
+        and you can scroll both vertically and horizontally by setting the
+        horizontal property.
+      </Text>
+      <Text style={styles.aboutme}>
+        The ScrollView is a generic scrolling container that can contain
+        multiple components and views. The scrollable items can be heterogeneous,
+        and you can scroll both vertically and horizontally by setting the
+        horizontal property.
+      </Text>
+
+
+    </ScrollView>
   );
 }
 
@@ -27,43 +44,29 @@ const styles = StyleSheet.create({
     marginTop: 60,
     alignItems: "center",
   },
-  redText: {
-    color: 'blue',
-    fontSize: 30,
+  image: {
+    width: '100%',
+    height: 300,
+    marginTop: 60,
+    borderRadius: 30
+  },
+  bgImage: {
+    flex: 1,
+    justifyContent: 'center',
+    height: '100%',
+  },
+  aboutme: {
+    textAlign: 'justify',
+    fontSize: 20,
+    margin: 20,
+    color: 'black',
+
+  },
+  education: {
+    textAlign: 'justify',
+    fontSize: 20,
+    margin: 20,
+    color: 'black',
+
   },
 });
-
-/*Props and state*/
-
-// function Cat(props) {
-//   const [isHungry, setIsHungry] = useState(true);
-//   return (
-//     <View>
-//       <Text style={styles.container}>
-//         I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}
-//       </Text>
-//       <Button
-//         onPress={() => {
-//           setIsHungry(false);
-//         }}
-//         disabled={!isHungry}
-//         title={isHungry ? 'Give me some Food' : 'Thank You'}
-//       />
-//     </View>
-//   );
-// };
-
-// export default function Cafe() {
-//   return (
-//     <>
-//       <Cat name="milo" />
-//       <Cat name="silo" />
-//     </>
-//   );
-// };
-
-
-
-
-
-

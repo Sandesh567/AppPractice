@@ -1,40 +1,30 @@
-import { StyleSheet, Text, View, TextInput, Image, ImageBackground, Button, ScrollView } from 'react-native';
-export default function Down() {
+import { StyleSheet, Text, View, TextInput, Button, SectionList } from 'react-native';
+export default function Flat() {
   return (
-    <ScrollView>
-      <Image style={styles.image}
-        source={require('./assets/me.jpg')} />
+    <View style={styles.container}>
+      <Text style={styles.item}>BIM Courses</Text>
+      <SectionList
+        sections={[
+          { title: '6th Semester', data: ['Business Environment', 'Finance', 'Software Engineering', 'Summer Project', 'HRM'] },
+          { title: '7th Semester', data: ['Artificial Intelligence', 'Management Information System', 'OOAD', 'Business Strategy', 'Organizational Behavior', 'Operation Managemnet'] },
+          { title: '8th Semester', data: ['Supply Chain Management', 'Entrepreneur', 'Oprating System', 'Data Mining'] }
+        ]}
 
+        renderItem={({ item }) =>
+          <Text style={styles.item}>
+            {item}
+          </Text>
+        }
 
-      <Text style={styles.aboutme}>
-        Hi, I'm sandesh a developer. I'm Passionate about programming,
-        playing with fonts, integrating sophisticated styling, and fooling around
-        with my code to produce visually captivating and responsive web designs.
-        Let's build something amazing together!
-      </Text>
+        renderSectionHeader={({ section }) => (
+          <Text style={styles.header}>
+            {section.title}
+          </Text>
+        )}
 
-      <Text style={styles.education}>Education</Text>
-      <Text style={styles.aboutme}>
-        The ScrollView is a generic scrolling container that can contain
-        multiple components and views. The scrollable items can be heterogeneous,
-        and you can scroll both vertically and horizontally by setting the
-        horizontal property.
-      </Text>
-      <Text style={styles.aboutme}>
-        The ScrollView is a generic scrolling container that can contain
-        multiple components and views. The scrollable items can be heterogeneous,
-        and you can scroll both vertically and horizontally by setting the
-        horizontal property.
-      </Text>
-      <Text style={styles.aboutme}>
-        The ScrollView is a generic scrolling container that can contain
-        multiple components and views. The scrollable items can be heterogeneous,
-        and you can scroll both vertically and horizontally by setting the
-        horizontal property.
-      </Text>
-
-
-    </ScrollView>
+        keyExtractor={item => `BIM Courses- ${item}`}
+      />
+    </View>
   );
 }
 
@@ -44,29 +34,20 @@ const styles = StyleSheet.create({
     marginTop: 60,
     alignItems: "center",
   },
-  image: {
-    width: '100%',
-    height: 300,
-    marginTop: 60,
-    borderRadius: 30
-  },
-  bgImage: {
-    flex: 1,
-    justifyContent: 'center',
-    height: '100%',
-  },
-  aboutme: {
-    textAlign: 'justify',
+  item: {
+    padding: 10,
     fontSize: 20,
-    margin: 20,
-    color: 'black',
-
+    height: 44,
   },
-  education: {
-    textAlign: 'justify',
+  header: {
+    padding: 10,
     fontSize: 20,
-    margin: 20,
-    color: 'black',
+    height: 44,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247,247,247,1.0)',
+  }
 
-  },
 });
+
+
+

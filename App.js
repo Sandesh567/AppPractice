@@ -1,13 +1,14 @@
-import { StyleSheet, Text, View, TextInput, Button, SectionList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, SectionList, Platform } from 'react-native';
 export default function Flat() {
   return (
     <View style={styles.container}>
       <Text style={styles.item}>BIM Courses</Text>
       <SectionList
         sections={[
+          { title: '5th Semester', data: ['Java II', 'Marketing', 'Economics', 'Networking'] },
           { title: '6th Semester', data: ['Business Environment', 'Finance', 'Software Engineering', 'Summer Project', 'HRM'] },
           { title: '7th Semester', data: ['Artificial Intelligence', 'Management Information System', 'OOAD', 'Business Strategy', 'Organizational Behavior', 'Operation Managemnet'] },
-          { title: '8th Semester', data: ['Supply Chain Management', 'Entrepreneur', 'Oprating System', 'Data Mining'] }
+          { title: '8th Semester', data: ['Supply Chain', 'Entrepreneur', 'OS', 'DM'] },
         ]}
 
         renderItem={({ item }) =>
@@ -40,14 +41,21 @@ const styles = StyleSheet.create({
     height: 44,
   },
   header: {
+    ...Platform.select({
+      ios: {
+        backgroundColor: 'red',
+      },
+      android: {
+        backgroundColor: 'green',
+      },
+      default: {
+        // other platforms, web for example
+        backgroundColor: 'blue',
+      },
+    }),
     padding: 10,
     fontSize: 20,
     height: 44,
     fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-  }
-
-});
-
-
-
+  },
+})

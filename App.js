@@ -1,61 +1,26 @@
-import { StyleSheet, Text, View, TextInput, Button, SectionList, Platform } from 'react-native';
-export default function Flat() {
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+export default function Flex() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.item}>BIM Courses</Text>
-      <SectionList
-        sections={[
-          { title: '5th Semester', data: ['Java II', 'Marketing', 'Economics', 'Networking'] },
-          { title: '6th Semester', data: ['Business Environment', 'Finance', 'Software Engineering', 'Summer Project', 'HRM'] },
-          { title: '7th Semester', data: ['Artificial Intelligence', 'Management Information System', 'OOAD', 'Business Strategy', 'Organizational Behavior', 'Operation Managemnet'] },
-          { title: '8th Semester', data: ['Supply Chain', 'Entrepreneur', 'OS', 'DM'] },
-        ]}
-
-        renderItem={({ item }) =>
-          <Text style={styles.item}>
-            {item}
-          </Text>
-        }
-
-        renderSectionHeader={({ section }) => (
-          <Text style={styles.header}>
-            {section.title}
-          </Text>
-        )}
-
-        keyExtractor={item => `BIM Courses- ${item}`}
-      />
+    <View
+      style={[
+        styles.container,
+        {
+          // Try setting `flexDirection` to `"row"`.
+          flexDirection: 'row',
+        },
+      ]}>
+      <View style={{ flex: 1, backgroundColor: 'red' }} />
+      <View style={{ flex: 2, backgroundColor: 'darkorange' }} />
+      <View style={{ flex: 3, backgroundColor: 'green' }} />
     </View>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 60,
-    alignItems: "center",
+    flex: 1,
+    padding: 20,
   },
-  item: {
-    padding: 10,
-    fontSize: 20,
-    height: 44,
-  },
-  header: {
-    ...Platform.select({
-      ios: {
-        backgroundColor: 'red',
-      },
-      android: {
-        backgroundColor: 'green',
-      },
-      default: {
-        // other platforms, web for example
-        backgroundColor: 'blue',
-      },
-    }),
-    padding: 10,
-    fontSize: 20,
-    height: 44,
-    fontWeight: 'bold',
-  },
-})
+});

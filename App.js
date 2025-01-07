@@ -1,29 +1,47 @@
-import React from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
+import React, {useEffect} from 'react';
+import {Animated, Text, View, useAnimatedValue} from 'react-native';
 
-export default function Flex() {
+const FadeInView = props => {
+  const fadeAnim = useAnimatedValue(0); // Initial value for opacity: 0
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 10000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Register</Text>
-      <TextInput
-        placeholder='Enter Name' />
-      <TextInput
-        placeholder='Enter Email' />
-      <TextInput
-        placeholder='Enter Number' />
-
-      <Button title='Click Here!' />
-    </View>
+    <Animated.View // Special animatable View
+      style={{
+        ...props.style,
+        opacity: fadeAnim, // Bind opacity to animated value
+      }}>
+      {props.children}
+    </Animated.View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    margin: 80,
-    flex: 1,
-    padding: 20,
-  },
-  text: {
-    textAlign: 'center'
-  }
-});
+// You can then use your `FadeInView` in place of a `View` in your components:
+export default () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <FadeInView
+        style={{
+          width: 250,
+          height: 50,
+          backgroundColor: 'powderblue',
+        }}>
+        <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>
+          Fading in
+        </Text>
+      </FadeInView>
+    </View>
+  );
+};

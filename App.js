@@ -1,30 +1,25 @@
-import React from "react";
-import { StyleSheet, View, Pressable } from "react-native";
+import React, { useState } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 
 const App = () => (
   <View style={styles.layout}>
-    <Pressable>
-      {(state) => <Box pressed={state.pressed} />}
-    </Pressable>
-
+    <View style={[styles.box, { backgroundColor: 'red' }]} />
+    <View style={[styles.box, { backgroundColor: 'green' }]} />
+    <View style={[styles.box, { backgroundColor: 'blue' }]} />
   </View>
 );
 
 export default App;
 
-export const Box = (props) => (
-  <View style={[styles.box, props.pressed && { backgroundColor: 'blue' }]} />
-);
-
 export const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#e5e5e5',
   },
   box: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'red'
-  }
+    backgroundColor: 'black',
+    height: 100
+  },
 });

@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
+
+
 
 const App = () => (
-  <View style={styles.layout}>
-    <View style={[styles.box, { backgroundColor: 'red' }]} />
-    <View style={[styles.box, { backgroundColor: 'green' }]} />
-    <View style={[styles.box, { backgroundColor: 'blue' }]} />
-  </View>
-);
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Feed" component={FeedScreen} options={{ title: 'Home' }} />
+      <Stack.Screen name="Catalog" component={CatalogScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+)
 
 export default App;
 
-export const styles = StyleSheet.create({
+
+export const FeedScreen = () => (
+  <View style={styles.layout}>
+    <Text style={styles.title}>First screen</Text>
+  </View>
+)
+
+export const CatalogScreen = () => (
+  <View style={styles.layout}>
+    <Text style={styles.title} >Second Screen</Text>
+  </View>
+)
+
+
+
+const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    backgroundColor: '#e5e5e5',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  box: {
-    backgroundColor: 'black',
-    height: 100
+  title: {
+    fontSize: 32,
+    marginBottom: 16,
   },
 });

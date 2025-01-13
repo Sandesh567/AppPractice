@@ -1,40 +1,58 @@
-// Installing Stack Navigation
+// Installing Tab Navigation
 /**
- *npm install @react-navigation/native @react-navigation/native-stack
+ * npm install @react-navigation/bottom-tabs
  */
 
+
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const FeedScreen = () => {
-  const navigation = useNavigation();
 
-  return (
-    <View style={styles.layout}>
-      <Text style={styles.title}>Feed</Text>
-      <Button
-        title="Go to catalog"
-        onPress={() => navigation.navigate('Catalog')}
-      />
-    </View>
-  );
-};
+const Stack = createNativeStackNavigator();
+
+
+const OverviewScreen = () => (
+  <View style={styles.layout}>
+    <Text style={styles.title}>About Sandesh</Text>
+  </View>
+);
+
+const ProfileNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name='Overview' component={OverviewScreen} />
+  </Stack.Navigator>
+)
+
+
+const FeedScreen = () => (
+  <View style={styles.layout}>
+    <Text style={styles.title}>Sandesh Raj Bhatta</Text>
+    <Text style={styles.subTitle}>
+      Hi, I'm sandesh a frontend developer. I'm Passionate about programming,
+      playing with fonts, integrating sophisticated styling, and fooling around
+      with my code to produce visually captivating and responsive web designs.
+      Let's build something amazing together!
+    </Text>
+  </View>
+);
 
 const CatalogScreen = () => (
   <View style={styles.layout}>
     <Text style={styles.title}>Catalog</Text>
   </View>
-);
+)
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export const AppNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="Feed" component={FeedScreen} />
-    <Stack.Screen name="Catalog" component={CatalogScreen} />
-  </Stack.Navigator>
+  <Tab.Navigator>
+    <Tab.Screen name="Feed" component={FeedScreen} />
+    <Tab.Screen name="Profile" component={ProfileNavigator} />
+    <Tab.Screen name="Catalog" component={CatalogScreen} />
+  </Tab.Navigator>
 );
 
 const App = () => (
@@ -55,4 +73,9 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 16,
   },
+  subTitle: {
+    fontSize: 22,
+    marginBottom: 18,
+    textAlign: 'justify'
+  }
 });

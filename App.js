@@ -1,65 +1,69 @@
-// Installing Tab Navigation
-/**
- * npm install @react-navigation/bottom-tabs
- */
-
-
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { createContext, useContext, useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Our global authentication state, with default values
+export const AuthContext = createContext({
+  hasUser: false,
+  setUser: () => { },
+});
+
+const LoginScreen = () => {
+  const { setUser } = useContext(AuthContext);
+
+  return (
+    <View style={styles.layout}>
+      <Text style={styles.title}>Login</Text>
+      <Button title="login" onPress={() => setUser(true)} />
+    </View>
+  );
+};
+
+const FeedScreen = () => {
+  const { setUser } = useContext(AuthContext);
+
+  return (
+    <View style={styles.layout}>
+      <Text style={styles.title}>Feed</Text>
+      <Button title="logout" onPress={() => setUser(false)} />
+
+    </View>
+
+  );
+};
 
 const Stack = createNativeStackNavigator();
 
+export const AppNavigator = () => {
+  const { hasUser } = useContext(AuthContext);
 
-const OverviewScreen = () => (
-  <View style={styles.layout}>
-    <Text style={styles.title}>About Sandesh</Text>
-  </View>
-);
+  return (
 
-const ProfileNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name='Overview' component={OverviewScreen} />
-  </Stack.Navigator>
-)
+    <Stack.Navigator>
+      {hasUser ?
+        <Stack.Screen name="Feed" component={FeedScreen} />
+        : <Stack.Screen name="Login" component={LoginScreen} />
+      }
+    </Stack.Navigator>
 
+  );
+};
 
-const FeedScreen = () => (
-  <View style={styles.layout}>
-    <Text style={styles.title}>Sandesh Raj Bhatta</Text>
-    <Text style={styles.subTitle}>
-      Hi, I'm sandesh a frontend developer. I'm Passionate about programming,
-      playing with fonts, integrating sophisticated styling, and fooling around
-      with my code to produce visually captivating and responsive web designs.
-      Let's build something amazing together!
-    </Text>
-  </View>
-);
+const App = () => {
+  // This is linked to our global authentication state.
+  // We connect this in React to re-render components when changing this value.
+  const [hasUser, setUser] = useState(false);
 
-const CatalogScreen = () => (
-  <View style={styles.layout}>
-    <Text style={styles.title}>Catalog</Text>
-  </View>
-)
+  return (
+    <AuthContext.Provider value={{ hasUser, setUser }}>
+      <NavigationContainer>
 
-const Tab = createBottomTabNavigator();
-
-export const AppNavigator = () => (
-  <Tab.Navigator>
-    <Tab.Screen name="Feed" component={FeedScreen} />
-    <Tab.Screen name="Profile" component={ProfileNavigator} />
-    <Tab.Screen name="Catalog" component={CatalogScreen} />
-  </Tab.Navigator>
-);
-
-const App = () => (
-  <NavigationContainer>
-    <AppNavigator />
-  </NavigationContainer>
-);
+        <AppNavigator />
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+};
 
 export default App;
 
@@ -73,9 +77,4 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 16,
   },
-  subTitle: {
-    fontSize: 22,
-    marginBottom: 18,
-    textAlign: 'justify'
-  }
 });

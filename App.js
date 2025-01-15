@@ -1,80 +1,40 @@
-import React, { createContext, useContext, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import {Alert, Button, StyleSheet, View} from 'react-native';
 
-// Our global authentication state, with default values
-export const AuthContext = createContext({
-  hasUser: false,
-  setUser: () => { },
-});
-
-const LoginScreen = () => {
-  const { setUser } = useContext(AuthContext);
+const ButtonBasics = () => {
+  const onPress = () => {
+    Alert.alert('You tapped the button!');
+  };
 
   return (
-    <View style={styles.layout}>
-      <Text style={styles.title}>Login</Text>
-      <Button title="login" onPress={() => setUser(true)} />
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button onPress={onPress} title="Press Me" />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button onPress={onPress} title="Press Me" color="#841584" />
+      </View>
+      <View style={styles.alternativeLayoutButtonContainer}>
+        <Button onPress={onPress} title="This looks great!" />
+        <Button onPress={onPress} title="OK!" color="#841584" />
+      </View>
     </View>
   );
 };
-
-const FeedScreen = () => {
-  const { setUser } = useContext(AuthContext);
-
-  return (
-    <View style={styles.layout}>
-      <Text style={styles.title}>Feed</Text>
-      <Button title="logout" onPress={() => setUser(false)} />
-
-    </View>
-
-  );
-};
-
-const Stack = createNativeStackNavigator();
-
-export const AppNavigator = () => {
-  const { hasUser } = useContext(AuthContext);
-
-  return (
-
-    <Stack.Navigator>
-      {hasUser ?
-        <Stack.Screen name="Feed" component={FeedScreen} />
-        : <Stack.Screen name="Login" component={LoginScreen} />
-      }
-    </Stack.Navigator>
-
-  );
-};
-
-const App = () => {
-  // This is linked to our global authentication state.
-  // We connect this in React to re-render components when changing this value.
-  const [hasUser, setUser] = useState(false);
-
-  return (
-    <AuthContext.Provider value={{ hasUser, setUser }}>
-      <NavigationContainer>
-
-        <AppNavigator />
-      </NavigationContainer>
-    </AuthContext.Provider>
-  );
-};
-
-export default App;
 
 const styles = StyleSheet.create({
-  layout: {
+  container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  title: {
-    fontSize: 32,
-    marginBottom: 16,
+  buttonContainer: {
+    margin: 20,
+  },
+  alternativeLayoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
+
+export default ButtonBasics;

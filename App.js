@@ -6,18 +6,30 @@ const ButtonBasics = () => {
     Alert.alert('You tapped the button!');
   };
 
+  //Button props : onPress and title
+  //disabled props can also be used in the button
+
   return (
     <View style={styles.container}>
+  //1st button 
       <View style={styles.buttonContainer}>
         <Button onPress={onPress} title="Press Me" />
       </View>
+
+  //2nd Button
       <View style={styles.buttonContainer}>
         <Button onPress={onPress} title="Press Me" color="#841584" />
       </View>
+
+  //3rd Button
+  
       <View style={styles.alternativeLayoutButtonContainer}>
         <Button onPress={onPress} title="This looks great!" />
         <Button onPress={onPress} title="OK!" color="#841584" />
       </View>
+
+
+  
     </View>
   );
 };

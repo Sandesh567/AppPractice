@@ -1,35 +1,24 @@
 import React from 'react';
-import {Alert, Button, StyleSheet, View} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const ButtonBasics = () => {
-  const onPress = () => {
-    Alert.alert('You tapped the button!');
-  };
-
-  //Button props : onPress and title
-  //disabled props can also be used in the button
+const Gradient = () => {
 
   return (
     <View style={styles.container}>
-  //1st button 
-      <View style={styles.buttonContainer}>
-        <Button onPress={onPress} title="Press Me" />
-      </View>
 
-  //2nd Button
-      <View style={styles.buttonContainer}>
-        <Button onPress={onPress} title="Press Me" color="#841584" />
-      </View>
-
-  //3rd Button
-  
-      <View style={styles.alternativeLayoutButtonContainer}>
-        <Button onPress={onPress} title="This looks great!" />
-        <Button onPress={onPress} title="OK!" color="#841584" />
-      </View>
+      <LinearGradient
+        // Background Linear Gradient
+        colors={['rgba(58, 131, 244, 0.4)', 'rgba(9,181,211,0.4)']}
+        style={styles.container}
+      >
+        <Text style={styles.text}>
+          Veggie's
+        </Text>
 
 
-  
+
+      </LinearGradient>
     </View>
   );
 };
@@ -39,14 +28,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  buttonContainer: {
-    margin: 20,
-  },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+  text: {
+    fontSize: 21,
+
+  }
 });
 
-export default ButtonBasics;
+export default Gradient;

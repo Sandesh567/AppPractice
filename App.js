@@ -1,84 +1,33 @@
-import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableWithoutFeedback, TouchableHighlight, Image, TouchableOpacity } from 'react-native';
 
-export default class App extends React.Component {
+export default function App() {
+  return (
 
-  signupPressed = ()=>{
-    Alert.alert("Completed Sign Up")
-  }
-
-  loginPressed = ()=> {
-    Alert.alert("Completed Login!")
-  }
-
-  render() {
-    return (
-      <ImageBackground
-        source={require('./assets/background.png')}
-        style={styles.background}
+    // Representation of touchable without feedback
+    <SafeAreaView style={styles.container}>
+      <Text>Click the image!</Text>
+      <TouchableHighlight
+        onPress={() => console.log("Image is clicked")}
       >
-        <View>
-          <Image
-            source={require('./assets/logo.png')}
-            style={styles.logo}
-            resizeMode="contain"
-          >
-          </Image>
-          <Text style={styles.text}>Travel with people. Make new friends.</Text>
-          <TouchableOpacity 
-            onPress={this.signupPressed}
-          >
-            <Text style={styles.signup}>Sign Up</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.loginPressed}
-          >
-            <Text style={styles.login}>Log In</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    );
-  }
+
+        <Image source={{
+          width: 300,
+          height: 400,
+          uri: "https://picsum.photos/300/300"
+        }}
+        />
+
+      </TouchableHighlight>
+
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    background: {
-      width: '100%',
-      height: '100%'
-    },
-    logo:{
-      width: 280,
-      height: 280,
-      marginLeft: '15%',
-      marginTop: '10%'
-    },
-    text: {
-      color: 'white',
-      marginTop: '-25%',
-      marginLeft: '20%'
-    },
-    signup: {
-      backgroundColor: 'white',
-      color: '#3A59FF',
-      width: "75%",
-      borderRadius: 25,
-      textAlign: 'center',
-      fontWeight: 'bold',
-      marginLeft: '11%',
-      padding: "2%",
-      fontSize:  27,
-      marginTop: '70%'
-    },
-    login: {
-      backgroundColor: '#3A59FF',
-      color: 'white',
-      width: "75%",
-      borderRadius: 25,
-      textAlign: 'center',
-      fontWeight: 'bold',
-      marginLeft: '11%',
-      padding: "2%",
-      fontSize:  27,
-      marginTop: '10%'
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

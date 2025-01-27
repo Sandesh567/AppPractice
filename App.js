@@ -1,6 +1,9 @@
 import { StyleSheet, Text, SafeAreaView, TouchableWithoutFeedback, TouchableHighlight, Image, TouchableOpacity } from 'react-native';
+//Install below hooks to understand the orientation of your device
+import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
 
 export default function App() {
+   const { landscape } = useDeviceOrientation();
   return (
 
     // Representation of touchable without feedback
@@ -16,10 +19,9 @@ export default function App() {
           uri: "https://picsum.photos/300/300"
         }}
         />
+          /* Dimension and device orientation*/
 
       </TouchableHighlight>
-          
-
     </SafeAreaView>
   );
 }
@@ -32,3 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+

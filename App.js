@@ -22,6 +22,13 @@ export default function App() {
           /* Dimension and device orientation*/
 
       </TouchableHighlight>
+            <View style={{ backgroundColor: 'dodgerblue', width: 100, height: 100, flexDirection: 'row' }}>
+
+      <View style={{ backgroundColor: 'gold', width: 100, height: 100 }} />
+
+      <View style={{ backgroundColor: 'tomato', width: 100, height: 100 }} />
+
+    </View>
     </SafeAreaView>
   );
 }
